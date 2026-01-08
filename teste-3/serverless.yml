@@ -1,0 +1,26 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: personaleddiewallnuttesting
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: teste-app
+service: aws-python-fastapi-mangum
+
+provider:
+  name: aws
+  runtime: python3.12
+  # Uncomment to easily set up a custom domain. Read the docs for more details:
+  # https://www.serverless.com/framework/docs/providers/aws/guide/domains
+  # domain: api.example.com
+
+functions:
+  api:
+    handler: app.handler
+    events:
+      - http:
+          path: /
+          method: ANY
+      - http:
+          path: /{proxy+}
+          method: ANY
+
+plugins:
+  - serverless-python-requirements
